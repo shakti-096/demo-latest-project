@@ -1,0 +1,14 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name.financial-institution-manager}
+    username: ${spring.datasource.username.financial-institution-manager}
+    password: ${spring.datasource.password.financial-institution-manager}
+    url: ${spring.datasource.url.financial-institution-manager}
+
+backbase:
+  eaa:
+    financial-institution:
+      provider: mock

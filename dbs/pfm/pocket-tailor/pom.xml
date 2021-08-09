@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>pfm</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>pocket-tailor</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>Backbase DBS :: P F M :: pocket-tailor</name>
+
+    <properties>
+        <spring.datasource.driver-class-name.pocket-tailor>com.mysql.jdbc.Driver</spring.datasource.driver-class-name.pocket-tailor>
+        <spring.datasource.url.pocket-tailor>jdbc:mysql://localhost:3306/pocket_tailor?useSSL=false</spring.datasource.url.pocket-tailor>
+        <spring.datasource.username.pocket-tailor>root</spring.datasource.username.pocket-tailor>
+        <spring.datasource.password.pocket-tailor>root</spring.datasource.password.pocket-tailor>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.backbase.dbs.pfm</groupId>
+            <artifactId>pocket-tailor</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.backbase.oss</groupId>
+                <artifactId>blade-maven-plugin</artifactId>
+
+                <configuration>
+                    <openBrowserOnStartup>false</openBrowserOnStartup>
+                    <detectAndConfigureSpringConfigLocation>true</detectAndConfigureSpringConfigLocation>
+                    <systemProperties>
+                        <spring.datasource.driver-class-name.pocket-tailor>${spring.datasource.driver-class-name.pocket-tailor}</spring.datasource.driver-class-name.pocket-tailor>
+                        <spring.datasource.url.pocket-tailor>${spring.datasource.url.pocket-tailor}</spring.datasource.url.pocket-tailor>
+                        <spring.datasource.username.pocket-tailor>${spring.datasource.username.pocket-tailor}</spring.datasource.username.pocket-tailor>
+                        <spring.datasource.password.pocket-tailor>${spring.datasource.password.pocket-tailor}</spring.datasource.password.pocket-tailor>
+                </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

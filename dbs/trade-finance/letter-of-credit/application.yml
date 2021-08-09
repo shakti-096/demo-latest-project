@@ -1,0 +1,15 @@
+---
+### Live profile
+spring:
+  profiles:
+    active: live
+---
+spring:
+  profiles: live
+  liquibase:
+    enabled: false
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.letter-of-credit}
+    password: ${spring.datasource.password.letter-of-credit}
+    url: ${spring.datasource.url.letter-of-credit}

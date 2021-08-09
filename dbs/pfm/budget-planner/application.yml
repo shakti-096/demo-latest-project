@@ -1,0 +1,9 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name.budget-planner}
+    username: ${spring.datasource.username.budget-planner}
+    password: ${spring.datasource.password.budget-planner}
+    url: ${spring.datasource.url.budget-planner}

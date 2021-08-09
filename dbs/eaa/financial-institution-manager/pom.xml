@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>eaa</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>financial-institution-manager</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>Backbase DBS :: E A A:: financial-institution-manager</name>
+
+    <properties>
+        <spring.datasource.driver-class-name.financial-institution-manager>com.mysql.jdbc.Driver</spring.datasource.driver-class-name.financial-institution-manager>
+        <spring.datasource.url.financial-institution-manager>jdbc:mysql://localhost:3306/financial_institution_manager?useSSL=false</spring.datasource.url.financial-institution-manager>
+        <spring.datasource.username.financial-institution-manager>root</spring.datasource.username.financial-institution-manager>
+        <spring.datasource.password.financial-institution-manager>root</spring.datasource.password.financial-institution-manager>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.backbase.dbs.eaa.fi</groupId>
+            <artifactId>financial-institution-manager</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.backbase.oss</groupId>
+                <artifactId>blade-maven-plugin</artifactId>
+
+                <configuration>
+                    <openBrowserOnStartup>false</openBrowserOnStartup>
+                    <detectAndConfigureSpringConfigLocation>true</detectAndConfigureSpringConfigLocation>
+                    <systemProperties>
+                        <spring.datasource.driver-class-name.financial-institution-manager>${spring.datasource.driver-class-name.financial-institution-manager}</spring.datasource.driver-class-name.financial-institution-manager>
+                        <spring.datasource.url.financial-institution-manager>${spring.datasource.url.financial-institution-manager}</spring.datasource.url.financial-institution-manager>
+                        <spring.datasource.username.financial-institution-manager>${spring.datasource.username.financial-institution-manager}</spring.datasource.username.financial-institution-manager>
+                        <spring.datasource.password.financial-institution-manager>${spring.datasource.password.financial-institution-manager}</spring.datasource.password.financial-institution-manager>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

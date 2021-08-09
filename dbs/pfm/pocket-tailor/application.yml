@@ -1,0 +1,9 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name.pocket-tailor}
+    username: ${spring.datasource.username.pocket-tailor}
+    password: ${spring.datasource.password.pocket-tailor}
+    url: ${spring.datasource.url.pocket-tailor}
