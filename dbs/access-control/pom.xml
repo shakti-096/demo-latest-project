@@ -39,6 +39,8 @@
         <module>user-profile-core-mock</module>
         <module>user-profile-manager</module>
         <module>user-manager</module>
+        <module>kyc-api-spec-poc</module>
+        <module>kyc-service-poc</module>
     </modules>
 
     <dependencies>
@@ -159,6 +161,9 @@
                                 <webApp>
 
                                     <module>user-manager</module>
+                                </webApp>
+                                <webApp>
+                                    <module>kyc-service-poc</module>
                                 </webApp>
                             </webApps>
                         </stage>
