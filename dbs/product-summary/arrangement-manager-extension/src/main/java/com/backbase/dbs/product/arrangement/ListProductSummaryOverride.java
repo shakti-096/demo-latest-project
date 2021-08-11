@@ -1,9 +1,7 @@
 package com.backbase.dbs.product.arrangement;
 
-import com.backbase.dbs.arrangement.client.model.CurrentAccountDto;
 import com.backbase.dbs.arrangement.client.model.CurrentAccountProductKindsDto;
 import com.backbase.dbs.arrangement.client.model.SummaryAggregatedBalanceDto;
-import com.backbase.dbs.arrangement.commons.model.AggregatedBalancesDto;
 import com.backbase.dbs.product.Configurations;
 import com.backbase.dbs.product.balance.AggregatedBalanceCurrency;
 import com.backbase.dbs.product.balance.BalanceService;
@@ -36,15 +34,21 @@ import java.util.Set;
 @Service
 public class ListProductSummaryOverride extends ProductSummaryService {
     private static final Logger log = LoggerFactory.getLogger(ProductSummaryService.class);
-    private Configurations configurations;
-    private ArrangementService arrangementService;
-    private JwtContext jwtContext;
-    private AccessControlClient accessControlClient;
-    private ArrangementJpaRepository arrangementRepository;
-    private BalanceService balanceService;
+    private final Configurations configurations;
+    private final ArrangementService arrangementService;
+    private final JwtContext jwtContext;
+    private final AccessControlClient accessControlClient;
+    private final ArrangementJpaRepository arrangementRepository;
+    private final BalanceService balanceService;
 
     public ListProductSummaryOverride(Configurations configurations, ArrangementService arrangementService, JwtContext jwtContext, AccessControlClient accessControlClient, ArrangementJpaRepository arrangementRepository, BalanceService balanceService) {
         super(configurations, arrangementService, jwtContext, accessControlClient, arrangementRepository, balanceService);
+        this.configurations = configurations;
+        this.arrangementService = arrangementService;
+        this.jwtContext = jwtContext;
+        this.accessControlClient = accessControlClient;
+        this.arrangementRepository = arrangementRepository;
+        this.balanceService = balanceService;
     }
 
     @Override
