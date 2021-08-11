@@ -27,6 +27,7 @@
     <modules>
         <module>account-mock</module>
         <module>arrangement-manager</module>
+        <module>arrangement-manager-extension</module>
     </modules>
 
     <dependencies>
