@@ -20,8 +20,10 @@
     <packaging>war</packaging>
     <name>Backbase :: payment-order-integration-service</name>
 
+
     <properties>
         <java.version>11</java.version>
+        <specs.path>${project.build.directory}/specs</specs.path>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +46,44 @@
             
            <!-- Add dependencies for your services, e.g. API Specs, integration clients -->
 
-           <!-- Uncomment the following dependency if DBS inter-service communication is needed -->
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>service-sdk-common-core</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>api</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>auth-security</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>communication</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>service-sdk-starter-test</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>0.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.2</version>
+            </dependency>
+            <!-- Uncomment the following dependency if DBS inter-service communication is needed -->
            <!--
              <dependency>
                 <groupId>com.backbase.buildingblocks</groupId>
@@ -52,5 +91,66 @@
              </dependency>
            -->
         </dependencies>
-
+<build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>unpack-integration-spec</id>
+                <phase>initialize</phase>
+                <goals>
+                    <goal>unpack</goal>
+                </goals>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>com.backbase.dbs.paymentorder</groupId>
+                            <artifactId>payment-order-service</artifactId>
+                            <classifier>api</classifier>
+                            <type>zip</type>
+                            <overWrite>true</overWrite>
+                        </artifactItem>
+                    </artifactItems>
+                    <outputDirectory>${specs.path}</outputDirectory>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+        <plugin>
+            <groupId>com.backbase.oss</groupId>
+            <artifactId>boat-maven-plugin</artifactId>
+            <version>0.13.0</version>
+            <executions>
+                <execution>
+                    <id>generate-integration-outbound-api</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate-spring-boot-embedded</goal>
+                    </goals>
+                    <configuration>
+                        <inputSpec>${specs.path}/payment/payment-order-integration-outbound-api-v2.0.6.yaml</inputSpec>
+                        <output>${project.build.directory}/generated-sources/</output>
+                        <modelPackage>com.backbase.payments.integration.model</modelPackage>
+                        <apiPackage>com.backbase.payments.integration.outbound.api</apiPackage>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>generate-integration-inbound-client</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>generate-rest-template-embedded</goal>
+                    </goals>
+                    <configuration>
+                        <inputSpec>${specs.path}/payment/payment-order-integration-inbound-api-v2.0.2.yaml</inputSpec>
+                        <output>${project.build.directory}/generated-sources/</output>
+                        <modelPackage>com.backbase.payments.integration.model</modelPackage>
+                        <apiPackage>com.backbase.payments.integration.inbound.api</apiPackage>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>
